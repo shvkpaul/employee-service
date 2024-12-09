@@ -18,18 +18,15 @@ CREATE TABLE IF NOT EXISTS project (
     CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employee(id)
 );
 
--- Stored Procedure
---CREATE PROCEDURE delete_role(IN role_id INT, IN default_employee_id INT)
---AS
---BEGIN
---    DELETE FROM Employee WHERE roleid = role_id;
---    UPDATE Project SET employee_id = default_employee_id WHERE employee_id NOT IN (SELECT id FROM Employee);
---    DELETE FROM Role WHERE id = role_id;
---END;
+-- Create a stored procedure
+CREATE ALIAS DeleteRoleAndReassignProjects FOR "com.shvkpaul.employee.service.H2StoredProcedures.deleteRoleAndReassignProjects";
 
 -- Insert roles
 INSERT INTO role (name) VALUES ('Developer');
 INSERT INTO role (name) VALUES ('Manager');
+INSERT INTO role (name) VALUES ('Tester');
+INSERT INTO role (name) VALUES ('Architect');
+INSERT INTO role (name) VALUES ('Designer');
 
 -- Insert employees
 INSERT INTO employee (firstname, surname, role_id) VALUES ('S', 'Paul', 1);

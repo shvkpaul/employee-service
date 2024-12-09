@@ -12,8 +12,13 @@ public class EmployeeMapper {
     public Employee toEntity(EmployeeRequest employeeRequest) {
         Employee employee = new Employee();
 
-        employee.setFirstname(employeeRequest.getName().split(" ")[0]);
-        employee.setSurname(employeeRequest.getName().split(" ")[1]);
+        if (employeeRequest.getName().contains(" ")) {
+            employee.setFirstname(employeeRequest.getName().split(" ")[0]);
+            employee.setSurname(employeeRequest.getName().split(" ")[1]);
+        } else {
+            employee.setFirstname(employeeRequest.getName());
+            employee.setSurname("");
+        }
 
         return employee;
     }

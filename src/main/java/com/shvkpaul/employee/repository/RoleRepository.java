@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
     @Procedure("DeleteRoleAndReassignProjects")
-    void deleteRole(Long roleId, Long defaultEmployeeId);
+    void deleteRoleAndReassignProjects(Long roleId, Long defaultEmployeeId);
 }

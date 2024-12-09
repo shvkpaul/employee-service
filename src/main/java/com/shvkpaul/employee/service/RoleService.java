@@ -1,6 +1,7 @@
 package com.shvkpaul.employee.service;
 
 import com.shvkpaul.employee.repository.RoleRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,8 +12,9 @@ public class RoleService {
         this.roleRepository = roleRepository;
     }
 
-    public void deleteRole(Long roleId, Long defaultEmployeeId) {
-        roleRepository.deleteRole(roleId, defaultEmployeeId);
+    @Transactional
+    public void deleteRoleAndReassignProjects(Long roleId, Long defaultEmployeeId) {
+        roleRepository.deleteRoleAndReassignProjects(roleId, defaultEmployeeId);
     }
 
 }
