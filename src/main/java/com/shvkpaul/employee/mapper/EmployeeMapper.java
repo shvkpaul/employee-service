@@ -2,15 +2,24 @@ package com.shvkpaul.employee.mapper;
 
 import com.shvkpaul.employee.dto.EmployeeDTO;
 import com.shvkpaul.employee.entity.Employee;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.springframework.stereotype.Service;
 
-@Mapper(componentModel = "spring")
-public interface EmployeeMapper {
+@Service
+public class EmployeeMapper {
 
-    @Mapping(source = "role.id", target = "roleId")
-    EmployeeDTO toDto(Employee employee);
+    public Employee toEntity(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        employee.setId(employeeDTO.getId());
+        employee.setFirstname(employeeDTO.getName().split(" ")[0]);
+        employee.setSurname(employeeDTO.getName().split(" ")[1]);
+        return employee;
+    }
 
-    @Mapping(source = "roleId", target = "role.id")
-    Employee toEntity(EmployeeDTO employeeDTO);
+
+    public EmployeeDTO toDto(Employee employee) {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setId(employee.getId());
+        employeeDTO.setName(employee.getFirstname() + " " + employee.getSurname());
+        return employeeDTO;
+    }
 }
