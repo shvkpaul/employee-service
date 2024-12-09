@@ -1,6 +1,9 @@
 package com.shvkpaul.employee.controller;
 
-import com.shvkpaul.employee.dto.EmployeeDTO;
+
+import com.shvkpaul.employee.model.EmployeeRequest;
+import com.shvkpaul.employee.model.EmployeeResponse;
+import com.shvkpaul.employee.model.GenericResponse;
 import com.shvkpaul.employee.service.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -36,8 +39,8 @@ public class EmployeeController {
             )
         }
     )
-    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        return ResponseEntity.ok(employeeService.createEmployee(employeeDTO));
+    public ResponseEntity<EmployeeResponse> createEmployee(@RequestBody EmployeeRequest employeeRequest) {
+        return ResponseEntity.ok(employeeService.createEmployee(employeeRequest));
     }
 
     @GetMapping("/{id}")
@@ -53,7 +56,7 @@ public class EmployeeController {
             )
         }
     )
-    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable Long id) {
+    public ResponseEntity<EmployeeResponse> getEmployeeById(@PathVariable Long id) {
         return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
 
@@ -75,8 +78,8 @@ public class EmployeeController {
             )
         }
     )
-    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
-        return ResponseEntity.ok(employeeService.updateEmployee(id, employeeDTO));
+    public ResponseEntity<EmployeeResponse> updateEmployee(@PathVariable Long id, @RequestBody EmployeeRequest employeeRequest) {
+        return ResponseEntity.ok(employeeService.updateEmployee(id, employeeRequest));
     }
 
     @DeleteMapping("/{id}")
@@ -92,8 +95,8 @@ public class EmployeeController {
             )
         }
     )
-    public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+    public ResponseEntity<GenericResponse> deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
-        return ResponseEntity.ok("{\"message\": \"Employee deleted successfully\"}");
+        return ResponseEntity.ok(new GenericResponse("Employee deleted successfully"));
     }
 }

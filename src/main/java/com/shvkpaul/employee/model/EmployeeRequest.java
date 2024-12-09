@@ -1,5 +1,6 @@
 package com.shvkpaul.employee.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -16,5 +17,6 @@ public class EmployeeRequest {
     private String name;
 
     @NotNull(message = "Role ID is mandatory")
-    private String role_id;
+    @JsonProperty("role_id")
+    private Long roleId;
 }

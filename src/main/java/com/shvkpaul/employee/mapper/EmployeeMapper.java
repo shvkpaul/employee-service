@@ -1,25 +1,31 @@
 package com.shvkpaul.employee.mapper;
 
-import com.shvkpaul.employee.dto.EmployeeDTO;
+
 import com.shvkpaul.employee.entity.Employee;
+import com.shvkpaul.employee.model.EmployeeRequest;
+import com.shvkpaul.employee.model.EmployeeResponse;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeMapper {
 
-    public Employee toEntity(EmployeeDTO employeeDTO) {
+    public Employee toEntity(EmployeeRequest employeeRequest) {
         Employee employee = new Employee();
-        employee.setId(employeeDTO.getId());
-        employee.setFirstname(employeeDTO.getName().split(" ")[0]);
-        employee.setSurname(employeeDTO.getName().split(" ")[1]);
+
+        employee.setFirstname(employeeRequest.getName().split(" ")[0]);
+        employee.setSurname(employeeRequest.getName().split(" ")[1]);
+
         return employee;
     }
 
 
-    public EmployeeDTO toDto(Employee employee) {
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(employee.getId());
-        employeeDTO.setName(employee.getFirstname() + " " + employee.getSurname());
-        return employeeDTO;
+    public EmployeeResponse toDto(Employee employee) {
+        EmployeeResponse employeeResponse = new EmployeeResponse();
+
+        employeeResponse.setId(employee.getId());
+        employeeResponse.setName(employee.getFirstname() + " " + employee.getSurname());
+        employeeResponse.setRoleId(employee.getRole().getId());
+
+        return employeeResponse;
     }
 }

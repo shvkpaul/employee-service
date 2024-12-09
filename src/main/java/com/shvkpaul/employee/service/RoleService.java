@@ -1,18 +1,18 @@
 package com.shvkpaul.employee.service;
 
-import org.springframework.context.ApplicationContext;
+import com.shvkpaul.employee.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RoleService {
+    private final RoleRepository roleRepository;
 
-    private final ApplicationContext applicationContext;
-
-    public RoleService(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
+    public RoleService(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
-    public void deleteRole(Long roleId) {
-        RoleServiceUtility.deleteRole(applicationContext, roleId);
+    public void deleteRole(Long roleId, Long defaultEmployeeId) {
+        roleRepository.deleteRole(roleId, defaultEmployeeId);
     }
+
 }

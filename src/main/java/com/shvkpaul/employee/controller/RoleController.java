@@ -1,5 +1,6 @@
 package com.shvkpaul.employee.controller;
 
+import com.shvkpaul.employee.model.GenericResponse;
 import com.shvkpaul.employee.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -9,10 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/roles")
@@ -37,8 +35,10 @@ public class RoleController {
             )
         }
     )
-    public ResponseEntity<?> deleteRole(@PathVariable Long id) {
-        roleService.deleteRole(id);
-        return ResponseEntity.ok("{\"message\": \"Role and associated employees deleted successfully\"}");
+    public ResponseEntity<GenericResponse> deleteRole(
+        @PathVariable Long id,
+        @RequestParam Long defaultEmployeeId) {
+        roleService.deleteRole(id, defaultEmployeeId);
+        return ResponseEntity.ok(new GenericResponse("Role and associated employees deleted successfully"));
     }
 }

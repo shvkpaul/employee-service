@@ -1,5 +1,3 @@
-CREATE ALIAS DELETE_ROLE FOR "com.shvkpaul.employee.service.RoleServiceUtility.deleteRole";
-
 CREATE TABLE IF NOT EXISTS role (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
@@ -10,15 +8,24 @@ CREATE TABLE IF NOT EXISTS employee (
     firstname VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,
     role_id BIGINT NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES role(id)
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
 CREATE TABLE IF NOT EXISTS project (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     employee_id BIGINT NOT NULL,
-    FOREIGN KEY (employee_id) REFERENCES employee(id)
+    CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employee(id)
 );
+
+-- Stored Procedure
+--CREATE PROCEDURE delete_role(IN role_id INT, IN default_employee_id INT)
+--AS
+--BEGIN
+--    DELETE FROM Employee WHERE roleid = role_id;
+--    UPDATE Project SET employee_id = default_employee_id WHERE employee_id NOT IN (SELECT id FROM Employee);
+--    DELETE FROM Role WHERE id = role_id;
+--END;
 
 -- Insert roles
 INSERT INTO role (name) VALUES ('Developer');
