@@ -38,7 +38,7 @@ public class RoleController {
     public ResponseEntity<GenericResponse> deleteRole(
         @PathVariable Long id,
         @RequestParam Long defaultEmployeeId) {
-        roleService.deleteRole(id, defaultEmployeeId);
+        roleService.deleteRoleAndReassignProjects(id, defaultEmployeeId);
         return ResponseEntity.ok(new GenericResponse("Role and associated employees deleted successfully"));
     }
 }
