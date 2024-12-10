@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS project (
 );
 
 -- Create a stored procedure
-CREATE ALIAS DeleteRoleAndReassignProjects FOR "com.shvkpaul.employee.service.H2StoredProcedures.deleteRoleAndReassignProjects";
+CREATE ALIAS DeleteRoleAndReassignProjects FOR "com.shvkpaul.employee.service.StoredProcedures.deleteRoleAndReassignProjects";
 
 -- Insert roles
 INSERT INTO role (name) VALUES ('Developer');

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class H2StoredProcedures {
+public class StoredProcedures {
     public static void deleteRoleAndReassignProjects(Connection conn, long roleId, long defaultEmployeeId) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(
                 "UPDATE project SET employee_id = ? WHERE employee_id IN (SELECT id FROM employee WHERE role_id = ?)"
