@@ -30,7 +30,7 @@ supports operations such as creating, updating, retrieving, and deleting employe
 ## Setup Instructions
 
 Clone the Repository
-git clone https://github.com/your-repo-url
+git clone https://github.com/shvkpaul/employee-service.git
 
 Build the Project : mvn clean install
 Run the Application : mvn spring-boot:run
