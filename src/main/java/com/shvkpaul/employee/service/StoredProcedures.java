@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class StoredProcedures {
     public static void deleteRoleAndReassignProjects(Connection conn, long roleId, long defaultEmployeeId) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(
-                "UPDATE project SET employee_id = ? WHERE employee_id IN (SELECT id FROM employee WHERE role_id = ?)"
+            "UPDATE project SET employee_id = ? WHERE employee_id IN (SELECT id FROM employee WHERE role_id = ?)"
         )) {
             ps.setLong(1, defaultEmployeeId);
             ps.setLong(2, roleId);

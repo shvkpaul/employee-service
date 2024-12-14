@@ -31,6 +31,8 @@ INSERT INTO role (name) VALUES ('Designer');
 -- Insert employees
 INSERT INTO employee (firstname, surname, role_id) VALUES ('S', 'Paul', 1);
 INSERT INTO employee (firstname, surname, role_id) VALUES ('M', 'Das', 2);
+INSERT INTO employee (firstname, surname, role_id) VALUES ('P', 'Saha', 1);
+INSERT INTO employee (firstname, surname, role_id) VALUES ('Q', 'Sen', 1);
 
 -- Insert projects
 INSERT INTO project (name, employee_id) VALUES ('Project A', 1);

@@ -13,6 +13,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EmployeeRequest {
+
+    @NotNull
     @NotBlank(message = "Name is mandatory")
     private String name;
 

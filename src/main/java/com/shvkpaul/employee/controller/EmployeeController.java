@@ -10,10 +10,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -35,12 +36,12 @@ public class EmployeeController {
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = "400", description = "BAD REQUEST",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ProblemDetail.class)
+                    schema = @Schema(implementation = ErrorResponse.class)
                 )
             )
         }
     )
-    public ResponseEntity<EmployeeResponse> createEmployee(@RequestBody EmployeeRequest employeeRequest) {
+    public ResponseEntity<EmployeeResponse> createEmployee(@RequestBody @Valid EmployeeRequest employeeRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeService.createEmployee(employeeRequest));
     }
 
@@ -52,7 +53,7 @@ public class EmployeeController {
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = "404", description = "NOT FOUND",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ProblemDetail.class)
+                    schema = @Schema(implementation = ErrorResponse.class)
                 )
             )
         }
@@ -69,12 +70,12 @@ public class EmployeeController {
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = "400", description = "BAD REQUEST",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ProblemDetail.class)
+                    schema = @Schema(implementation = ErrorResponse.class)
                 )
             ),
             @ApiResponse(responseCode = "404", description = "NOT FOUND",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ProblemDetail.class)
+                    schema = @Schema(implementation = ErrorResponse.class)
                 )
             )
         }
@@ -91,7 +92,7 @@ public class EmployeeController {
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = "404", description = "NOT FOUND",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ProblemDetail.class)
+                    schema = @Schema(implementation = ErrorResponse.class)
                 )
             )
         }
